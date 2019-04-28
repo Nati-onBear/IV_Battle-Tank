@@ -17,6 +17,8 @@ Direct hit will lower health
 
 Player and enemy can use terrain as cover
 
+Some rock terrain can take in a few hit after totally destroyed
+
 There are health and ammo also damage booster pack that player or enemy can pick up
 
 There are different kinds of ammo: explosive, armor piercing, fire round...
