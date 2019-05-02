@@ -31,4 +31,10 @@ private:
 
 	// Move the barrel for projectile to hit where the crosshair intersects with world
 	void AimAtCrosshair();
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairXLocation = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairYLocation = (float)1 / 3;
 };
