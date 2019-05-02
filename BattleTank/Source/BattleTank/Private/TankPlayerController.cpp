@@ -3,6 +3,8 @@
 
 #include "TankPlayerController.h"
 
+#define OUT
+
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -19,8 +21,6 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	UE_LOG(LogTemp, Warning, TEXT("Tick working"));
-
 	AimAtCrosshair();
 }
 
@@ -29,12 +29,25 @@ ATank* ATankPlayerController::GetControlledTank() const
 	return Cast<ATank>(GetPawn());
 }
 
+// Linetrace through crosshair to get world location
+bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
+{
+	OutHitLocation = FVector(1.0);
+
+	return true;
+}
+
 void ATankPlayerController::AimAtCrosshair()
 {
 	// Protecting pointer
 	if (!ControlledTank) { return; }
 
-	// Linetrace through crosshair to get world location
+	FVector HitLocation; // OUT parameter
+	
 	// if (hit landscape)
-		// Tell controlled tank to aim at that point
+	if (GetSightRayHitLocation(HitLocation)) // I know, hard to understand
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
+		// TODO Tell controlled tank to aim at that point
+	}
 }
