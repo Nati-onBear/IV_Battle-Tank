@@ -29,6 +29,12 @@ private:
 	// Return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
+	// Find the crosshair position in pixel coordinates
+	FVector2D GetCrosshair() const;
+
+	// "De-project" the screen position of the crosshair to a world direction
+	bool GetLookDirection(FVector2D, FVector&) const;
+
 	// Move the barrel for projectile to hit where the crosshair intersects with world
 	void AimAtCrosshair();
 
