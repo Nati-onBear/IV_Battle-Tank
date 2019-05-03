@@ -35,6 +35,9 @@ private:
 	// "De-project" the screen position of the crosshair to a world direction
 	bool GetLookDirection(FVector2D, FVector&) const;
 
+	// Line-trace along that look direction, and see what we hit (at max range)
+	bool GetLookVectorHitLocation(FVector, FVector&) const;
+
 	// Move the barrel for projectile to hit where the crosshair intersects with world
 	void AimAtCrosshair();
 
@@ -43,4 +46,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float CrosshairYLocation = (float)1 / 3;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 10000000000.f; // how far the tank can line trace
 };
