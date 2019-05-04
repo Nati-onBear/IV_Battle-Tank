@@ -1,13 +1,17 @@
 // Copyright Nati-onBear Property
 
-
 #include "Tank.h"
 
 // Sets default values
 ATank::ATank()
-{
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+{ 
 	PrimaryActorTick.bCanEverTick = true;
+
+	ThisTankName = GetName();
+	// No need to protect pointer in constructor
+	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aming Component"));
+	if (!TankAimingComponent) 
+		UE_LOG(LogTemp, Warning, TEXT("No Tank Aiming"));
 }
 
 // Called when the game starts or when spawned
@@ -24,8 +28,7 @@ void ATank::Tick(float DeltaTime)
 
 void ATank::AimAt(FVector HitLocation)
 {
-	auto ThisTankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *ThisTankName, *HitLocation.ToString());
+	TankAimingComponent->AimAt(HitLocation);
 }
 
 // Called to bind functionality to input
