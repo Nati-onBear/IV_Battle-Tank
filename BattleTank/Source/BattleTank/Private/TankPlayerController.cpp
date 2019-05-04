@@ -41,10 +41,11 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	if (GetLookDirection(Crosshair, OUT LookDirection))
 	{
 		// Line-trace along that look direction, and see what we hit (at max range)
-		GetLookVectorHitLocation(LookDirection, OUT OutHitLocation);
+		if (GetLookVectorHitLocation(LookDirection, OUT OutHitLocation))
+			return true;
 	}
 	
-	return true;
+	return false;
 }
 
 FVector2D ATankPlayerController::GetCrosshair() const
@@ -81,8 +82,6 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		HitLocation = HitResult.Location;
 		return true;
 	}
-
-	HitLocation = FVector(0);
 	return false;
 }
 
@@ -91,11 +90,12 @@ void ATankPlayerController::AimAtCrosshair()
 	// Protecting pointer
 	if (!ControlledTank) { return; }
 
-	FVector HitLocation; // OUT parameter
+	FVector HitLocation;
+
 	// if (hit landscape)
 	if (GetSightRayHitLocation( OUT HitLocation ))
 	{
-		// TODO Tell controlled tank to aim at that point
-		UE_LOG(LogTemp, Warning, TEXT("HitResult: %s"), *HitLocation.ToString());
+		// Tell controlled tank to aim at that point
+		ControlledTank->AimAt(HitLocation);
 	}
 }
