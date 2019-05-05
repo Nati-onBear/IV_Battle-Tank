@@ -6,7 +6,8 @@
 #include "Components/ActorComponent.h"		// Inherited
 #include "TankAimingComponent.generated.h"
 
-class UTankBarrel;		// Forward Declaration: let header know that the class exist
+// Forward Declaration: let header know that the class exist
+class UTankBarrel;		
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
