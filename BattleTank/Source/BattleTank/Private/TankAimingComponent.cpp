@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "GameFramework/Actor.h"				// for GetOwner()->...
 #include "Components/StaticMeshComponent.h"		// for UStaticMeshComponent*->...
+#include "Kismet/GameplayStatics.h"				// for UGameplayStatics::...
 
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -12,7 +13,30 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!OwnerBarrel) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Lauching Speed: %f"), LaunchSpeed);
+
+	FVector OutLaunchVelocity(0);
+	FVector StartLocation = OwnerBarrel->GetSocketLocation("Projectile");
+	TArray<AActor*> ActorToIgnore;
+	// Calculate the OutLaunchVelocity
+	if (UGameplayStatics::SuggestProjectileVelocity(
+			this,
+			OutLaunchVelocity,
+			StartLocation,
+			HitLocation,
+			LaunchSpeed,
+			false,
+			0.f,
+			9.8f,
+			ESuggestProjVelocityTraceOption::DoNotTrace,
+			FCollisionResponseParams::DefaultResponseParam,
+			ActorToIgnore,
+			true)
+		)
+	{
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		auto TankName = GetOwner()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s"), *TankName,*AimDirection.ToString());
+	}
 }
 
 void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* Barrel) { this->OwnerBarrel = Barrel; }
