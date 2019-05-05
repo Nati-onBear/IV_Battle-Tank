@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Tank.h"
-#include "GameFramework/PlayerController.h"
+#include "GameFramework/PlayerController.h"		// Inherited
 #include "TankPlayerController.generated.h"
 
 /**

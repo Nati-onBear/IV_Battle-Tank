@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Tank.h"
-#include "AIController.h"
+#include "AIController.h"					// Inherited
 #include "TankAIController.generated.h"
 
 /**

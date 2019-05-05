@@ -3,9 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "Components/ActorComponent.h"		// Inherited
 #include "TankAimingComponent.generated.h"
 
+class UTankBarrel;		// Forward Declaration: let header know that the class exist
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -18,12 +19,12 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	void SetBarrelReference(UStaticMeshComponent*);
+	void SetBarrelReference(UTankBarrel*);
 
 	// TODO make SetTurretReference
 
 private:
-	UStaticMeshComponent* OwnerBarrel = nullptr;
+	UTankBarrel* OwnerBarrel = nullptr;
 
 	// Method for rotating barrel in PITCH (Y value)
 	void MoveBarrel(FVector AimDirection);
