@@ -20,14 +20,11 @@ public:
 
 	void SetBarrelReference(UStaticMeshComponent*);
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	// TODO make SetTurretReference
 
 private:
 	UStaticMeshComponent* OwnerBarrel = nullptr;
+
+	// Method for rotating barrel in PITCH (Y value)
+	void MoveBarrel(FVector AimDirection);
 };
