@@ -1,5 +1,6 @@
 // Copyright Nati-onBear Property
 
+#include "Tank.h"
 #include "TankPlayerController.h"
 #include "Engine/World.h"				// for GetWorld()->....
 

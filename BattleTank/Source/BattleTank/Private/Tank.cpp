@@ -1,5 +1,6 @@
 // Copyright Nati-onBear Property
 
+#include "TankAimingComponent.h"
 #include "Tank.h"
 
 // Sets default values
