@@ -35,5 +35,5 @@ private:
 	FString ThisTankName;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 5000; // TODO find sensible default
+	float LaunchSpeed = 8000; // TODO find sensible default
 };

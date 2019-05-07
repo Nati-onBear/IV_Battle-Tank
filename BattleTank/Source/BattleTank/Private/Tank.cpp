@@ -1,7 +1,7 @@
 // Copyright Nati-onBear Property
 
-#include "TankAimingComponent.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -12,7 +12,7 @@ ATank::ATank()
 	// No need to protect pointer in constructor
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aming Component"));
 	if (!TankAimingComponent) 
-		UE_LOG(LogTemp, Warning, TEXT("No Tank Aiming"));
+		UE_LOG(LogTemp, Warning, TEXT("No Tank Aiming Component"));
 }
 
 // Called when the game starts or when spawned
