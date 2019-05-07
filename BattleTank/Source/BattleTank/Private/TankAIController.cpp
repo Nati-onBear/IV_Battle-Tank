@@ -24,10 +24,7 @@ void ATankAIController::Tick(float DeltaTime)
 	AimAtPlayer();
 }
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
+ATank* ATankAIController::GetControlledTank() const { return Cast<ATank>(GetPawn()); }
 
 ATank* ATankAIController::GetPlayerTank() const
 {

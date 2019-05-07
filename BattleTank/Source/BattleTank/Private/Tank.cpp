@@ -5,7 +5,7 @@
 // Sets default values
 ATank::ATank()
 { 
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	ThisTankName = GetName();
 	// No need to protect pointer in constructor
@@ -18,12 +18,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-// Called every frame
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void ATank::AimAt(FVector HitLocation)

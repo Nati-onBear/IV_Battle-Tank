@@ -1,7 +1,7 @@
 // Copyright Nati-onBear Property
 
 #include "TankPlayerController.h"
-#include "Engine/World.h"
+#include "Engine/World.h"				// for GetWorld()->....
 
 #define OUT
 
@@ -24,10 +24,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimAtCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
+ATank* ATankPlayerController::GetControlledTank() const { return Cast<ATank>(GetPawn()); }
 
 // Linetrace through crosshair to get world location
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const

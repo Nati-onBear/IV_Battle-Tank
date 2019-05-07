@@ -8,7 +8,7 @@
 
 UTankAimingComponent::UTankAimingComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;		// TODO decide if this needs to tick
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
@@ -18,7 +18,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	FVector OutLaunchVelocity(0);
 	FVector StartLocation = OwnerBarrel->GetSocketLocation("Projectile");
 	
-	// Calculate the OutLaunchVelocity
+	// Calculate the OutLaunchVelocity, This is NOT WORKING, Found aim solution even when pointing at sky
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
 	(
 		this,
@@ -26,18 +26,22 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
-		false,
-		0.f,
-		9.8f,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		auto TankName = GetOwner()->GetName();
-		//UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s"), *TankName,*AimDirection.ToString());
+
+		auto time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: Got aim solution!"), time);
+
 		MoveBarrel(AimDirection);
+	}
+	else
+	{
+		auto time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: No aim solution!"), time);
 	}
 }
 
@@ -51,7 +55,6 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	auto BarrelRotator = OwnerBarrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	
 	
 	OwnerBarrel->Elevate(5);	// TODO remove magic number
 }

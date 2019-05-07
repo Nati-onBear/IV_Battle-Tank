@@ -18,8 +18,6 @@ class BATTLETANK_API ATank : public APawn
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void Tick(float DeltaTime) override;
-
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:
