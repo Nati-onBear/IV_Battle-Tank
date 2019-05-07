@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"							// get the inhirited methods of TankBarrel: GetSocketLocation
+#include "TankTurret.h"
 #include "GameFramework/Actor.h"				// for GetOwner()->...
 #include "Components/StaticMeshComponent.h"		// for UStaticMeshComponent*->...
 #include "Kismet/GameplayStatics.h"				// for UGameplayStatics::...
@@ -13,10 +14,10 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!OwnerBarrel) { return; }
+	if (!Barrel) { return; }
 
 	FVector OutLaunchVelocity(0);
-	FVector StartLocation = OwnerBarrel->GetSocketLocation("Projectile");
+	FVector StartLocation = Barrel->GetSocketLocation("Projectile");
 	
 	// Calculate the OutLaunchVelocity, This is NOT WORKING, Found aim solution even when pointing at sky
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
@@ -35,7 +36,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		MoveBarrel(AimDirection);
+		MoveComponent(AimDirection);
 	}
 	else
 	{
@@ -44,17 +45,21 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	}
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* Barrel) { this->OwnerBarrel = Barrel; }
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* Barrel) {  this->Barrel = Barrel; }
 
-void UTankAimingComponent::MoveBarrel(FVector AimDirection)
+void UTankAimingComponent::SetTurretReference(UTankTurret* Turret) { this->Turret = Turret; }
+
+void UTankAimingComponent::MoveComponent(FVector AimDirection)
 {
-	if (!OwnerBarrel) { return; }
+	if (!Barrel || !Turret) { return; }
 	
-	// Get difference between current barrel pitch and of AimDirection
-	auto BarrelRotator = OwnerBarrel->GetForwardVector().Rotation();
+	// Get difference between current barrel rotation and of AimDirection
+	auto CurrentBarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto CurrentTurretRotator = Turret->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator - BarrelRotator;
+	auto DeltaBarrelRotator = AimAsRotator - CurrentBarrelRotator;
+	auto DeltaTurretRotator = AimAsRotator - CurrentTurretRotator;
 	
-	OwnerBarrel->Elevate(DeltaRotator.Pitch);	// TODO remove magic number
+	Barrel->Elevate(DeltaBarrelRotator.Pitch);
+	Turret->Rotate(DeltaBarrelRotator.Yaw);
 }
-

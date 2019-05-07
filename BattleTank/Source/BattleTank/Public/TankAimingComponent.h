@@ -8,6 +8,7 @@
 
 // Forward Declaration: let header know that the class exist
 class UTankBarrel;		
+class UTankTurret;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -22,11 +23,13 @@ public:
 
 	void SetBarrelReference(UTankBarrel*);
 
-	// TODO make SetTurretReference
+	void SetTurretReference(UTankTurret*);
 
 private:
-	UTankBarrel* OwnerBarrel = nullptr;
+	UTankBarrel* Barrel = nullptr;
 
-	// Method for rotating barrel in PITCH (Y value)
-	void MoveBarrel(FVector AimDirection);
+	UTankTurret* Turret = nullptr;
+
+	// Method for elevating barrel in PITCH (Y value) and rotating turret in YAW (Z value)
+	void MoveComponent(FVector AimDirection);
 };
