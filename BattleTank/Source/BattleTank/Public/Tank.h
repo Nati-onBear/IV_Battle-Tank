@@ -10,6 +10,7 @@
 class UTankBarrel;	
 class UTankTurret;
 class UTankAimingComponent;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -30,6 +31,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
 private:
 	ATank();
 
@@ -37,6 +41,8 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	FString ThisTankName;
+
+	UTankBarrel* Barrel = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4000; // TODO find sensible default

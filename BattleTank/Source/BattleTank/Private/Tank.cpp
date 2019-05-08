@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "Engine/World.h"						// for GetWorld()->....
 
 // Sets default values
 ATank::ATank()
@@ -46,6 +47,6 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Fire Pressed"));
+	TankAimingComponent->Fire(ProjectileBlueprint);
 }
 

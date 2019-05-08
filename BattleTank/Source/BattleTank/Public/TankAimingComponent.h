@@ -9,6 +9,7 @@
 // Forward Declaration: let header know that the class exist
 class UTankBarrel;		
 class UTankTurret;
+class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -24,6 +25,8 @@ public:
 	void SetBarrelReference(UTankBarrel*);
 
 	void SetTurretReference(UTankTurret*);
+
+	void Fire(TSubclassOf<AProjectile>);
 
 private:
 	UTankBarrel* Barrel = nullptr;
