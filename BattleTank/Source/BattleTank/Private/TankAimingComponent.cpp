@@ -3,7 +3,6 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"							// get the inhirited methods of TankBarrel: GetSocketLocation
 #include "TankTurret.h"
-#include "Projectile.h"
 #include "GameFramework/Actor.h"				// for GetOwner()->...
 #include "Components/StaticMeshComponent.h"		// for UStaticMeshComponent*->...
 #include "Kismet/GameplayStatics.h"				// for UGameplayStatics::...
@@ -44,16 +43,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* Barrel) {  this->Barrel = Barrel; }
 
 void UTankAimingComponent::SetTurretReference(UTankTurret* Turret) { this->Turret = Turret; }
-
-void UTankAimingComponent::Fire(TSubclassOf<AProjectile> ProjectileBP)
-{
-	if (!Barrel) { return; }
-
-	FVector  SpawnLocation = Barrel->GetSocketLocation("Projectile");
-	FRotator SpawnRotation = Barrel->GetSocketRotation("Projectile");
-
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBP, SpawnLocation, SpawnRotation);
-}
 
 void UTankAimingComponent::MoveComponent(FVector AimDirection)
 {

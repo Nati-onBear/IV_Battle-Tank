@@ -3,13 +3,14 @@
 #include "Tank.h"
 #include "TankAimingComponent.h"
 #include "Engine/World.h"						// for GetWorld()->....
+#include "TankBarrel.h"
+#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
 { 
 	PrimaryActorTick.bCanEverTick = false;
 
-	ThisTankName = GetName();
 	// No need to protect pointer in constructor
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aming Component"));
 	if (!TankAimingComponent) 
@@ -30,6 +31,7 @@ void ATank::AimAt(FVector HitLocation)
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) 
 { 
 	if (!BarrelToSet) return;
+	Barrel = BarrelToSet;
 	TankAimingComponent->SetBarrelReference(BarrelToSet); 
 }
 
@@ -47,6 +49,13 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::Fire()
 {
-	TankAimingComponent->Fire(ProjectileBlueprint);
+	if (!Barrel) { return; }
+
+	FVector  SpawnLocation = Barrel->GetSocketLocation("Projectile");
+	FRotator SpawnRotation = Barrel->GetSocketRotation("Projectile");
+
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
