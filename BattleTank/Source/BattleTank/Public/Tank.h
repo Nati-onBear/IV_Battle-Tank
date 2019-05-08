@@ -40,4 +40,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4000; // TODO find sensible default
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 };
