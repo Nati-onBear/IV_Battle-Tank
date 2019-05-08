@@ -34,6 +34,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
+
 private:
 	ATank();
 
@@ -45,6 +48,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 5000; // TODO find sensible default
 
-	UFUNCTION(BlueprintCallable, Category = Firing)
-	void Fire();
+	float ReloadTimeInSec = 2;
+
+	double LastFireTime = 0;
 };
