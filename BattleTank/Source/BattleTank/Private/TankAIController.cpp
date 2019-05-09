@@ -19,7 +19,7 @@ void ATankAIController::Tick(float DeltaTime)
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
 		// TODO fire if ready
-		ControlledTank->Fire();
+		//ControlledTank->Fire();
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("No Player Tank"));
