@@ -7,9 +7,9 @@
 #include "TankTurret.generated.h"
 
 /**
- * 
+ * Set max turret's rotating speed
  */
-UCLASS( meta = (BlueprintSpawnableComponent) )
+UCLASS(meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
