@@ -45,9 +45,10 @@ private:
 
 	UTankBarrel* Barrel = nullptr;
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 5000; // TODO find sensible default
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSec = 2;
 
 	double LastFireTime = 0;

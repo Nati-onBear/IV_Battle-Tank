@@ -19,6 +19,6 @@ public:
 
 private:
 	//Sensible default
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MaxDegreePerSec = 30;
 };
