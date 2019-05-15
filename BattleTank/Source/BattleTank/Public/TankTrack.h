@@ -19,7 +19,7 @@ public:
 	void SetThrottle(float Throttle);
 
 	// Max force per track in Newton (F(N) = m(kg)a(m/s^2))
-	UPROPERTY(EditDefaultsOnly)
-	float MaxDriveForce = 40000000; // Assume that a tank of 50 tons and an acceleration of 10m/s^2
+	UPROPERTY(EditAnywhere)
+	float MaxDriveForce = 45000000; // Assume that a tank of 50 tons and an acceleration of 10m/s^2
 	// Note that default units in Unreal are N, kg, cm not m
 };
