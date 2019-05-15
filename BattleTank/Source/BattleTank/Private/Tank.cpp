@@ -14,11 +14,6 @@ ATank::ATank()
 
 	// No need to protect pointer in constructor
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aming Component"));
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
-	if (!TankAimingComponent) 
-		UE_LOG(LogTemp, Warning, TEXT("No Tank Aiming Component"));
-	if (!TankMovementComponent)
-		UE_LOG(LogTemp, Warning, TEXT("No Tank Movement Component"));
 }
 
 // Called when the game starts or when spawned
