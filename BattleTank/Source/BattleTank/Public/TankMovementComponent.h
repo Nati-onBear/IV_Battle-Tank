@@ -26,13 +26,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Moving)
 	void IntendTurnRight(float Throw);
 
-	// TODO Check best protection
-	// For AI Movement
-	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
-
 private:
 	UTankTrack* LeftTrack = nullptr;
 
 	UTankTrack* RightTrack = nullptr;
 	
+	// For AI Movement, called from MoveToActor in AI Controller
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 };
