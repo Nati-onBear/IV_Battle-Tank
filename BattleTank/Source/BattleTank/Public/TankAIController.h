@@ -20,5 +20,5 @@ private:
 
 private:
 	// How close a AI can get to player
-	float AcceptableRadius = 1000;
+	float AcceptableRadius = 4000;
 };

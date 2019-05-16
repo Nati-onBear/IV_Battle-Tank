@@ -26,7 +26,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Moving)
 	void IntendTurnRight(float Throw);
 
-	// Check best protection
+	// TODO Check best protection
+	// For AI Movement
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 private:
