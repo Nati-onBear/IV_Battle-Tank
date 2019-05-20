@@ -21,6 +21,7 @@ class BATTLETANK_API ATank : public APawn
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)

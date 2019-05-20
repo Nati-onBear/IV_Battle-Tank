@@ -18,9 +18,11 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-private:
+protected:
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	ATank* GetControlledTank() const;
 
+private:
 	ATank* ControlledTank;
 	// Return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
