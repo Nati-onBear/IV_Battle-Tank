@@ -19,6 +19,9 @@ enum class EAimingStatus : uint8
 class UTankBarrel;		
 class UTankTurret;
 
+/**
+ * For Tank to move turret and barrel to the aimed target
+ */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -28,11 +31,10 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
 	void AimAt(FVector HitLocation, float LaunchSpeed);
-
-	void SetBarrelReference(UTankBarrel*);
-
-	void SetTurretReference(UTankTurret*);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = State)
@@ -45,6 +47,4 @@ private:
 
 	// Method for elevating barrel in PITCH (Y value) and rotating turret in YAW (Z value)
 	void MoveComponent(FVector AimDirection);
-
-	
 };
