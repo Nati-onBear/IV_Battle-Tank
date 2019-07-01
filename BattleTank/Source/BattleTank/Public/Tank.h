@@ -8,7 +8,6 @@
 
 // Forward Declarations
 class UTankBarrel;	
-class UTankTurret;
 class UTankAimingComponent;
 class UTankMovementComponent;
 class AProjectile;
@@ -19,8 +18,6 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 protected:
-	virtual void BeginPlay() override;
-
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -32,9 +29,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
